@@ -1,0 +1,49 @@
+/*
+FONT INTEGRATION
+*/
+h1 {
+	font-family: "Playwrite CU", cursive;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.fontStyle {
+	font-family: "Playwrite CU", cursive;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.myImg {
+	height: 200px;
+}
+
+
+/*CODICE PER IL FOOTER CHE GESTISCE IL RIEMPIMENTO PAGINA*/
+html,
+body {
+	height: 100%;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+main {
+	flex: 1;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
+footer {
+	margin-top: 25px;
+}
+
+/*Spaziatura per impedire a navbar di coprire elementi del body*/
+.title-top-margin {
+	margin-top: 50px;
+}

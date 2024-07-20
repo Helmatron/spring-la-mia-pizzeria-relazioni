@@ -1,0 +1,145 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+
+<!-- HEAD -->
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>&hearts; Nuova Pizza &hearts;</title>
+
+	<!-- FAVICON -->
+	<link rel="icon" th:href="@{/icon/fav_icon_pizza.png}" type="image/png">
+
+	<!-- CSS BOOTSTRAP -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+	<!-- CUSTOM CSS -->
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<bo>
+
+	<!-- HEADER -->
+	<header th:insert="~{fragments/navbar :: navbar}"></header>
+
+	<!-- MAIN -->
+	<main>
+
+		<!-- CLASSE PER IMPORRE AL FOTTER DI STARE IN FONDO ALLA PAGINA -->
+		<div class="wrapper title-top-margin">
+
+			<!-- TITLE -->
+			<div class="container-fluid">
+				<div class="row my-5">
+					<h1 class="text-center">Crea una nuova pizza!</h1>
+				</div>
+
+				<!-- CONTEINER FORM -->
+				<div class="d-flex justify-content-center">
+					<div class="row col-12 col-sm-6 col-md-4 col-lg-5">
+
+						<!-- FORM -->
+						<form id="pizza-form" th:object="${pizza}" th:action="@{/nuova_pizza}" method="post">
+
+							<!-- NAME -->
+							<div class="mb-3">
+								<label for="name" class="form-label">Nome</label>
+								<input type="text" class="form-control" id="name" placeholder="Nome della nuova Pizza"
+									th:field="*{name}" th:errorClass="is-invalid">
+								<!-- gestione errori -->
+								<div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+									<ul>
+										<li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+									</ul>
+								</div>
+							</div>
+
+							<!-- INGREDIENTS -->
+							<div class="mb-3">
+								<label for="ingredients" class="form-label">Descrizione</label>
+								<input type="text" class="form-control" id="ingredients" placeholder="Lista ingredienti"
+									th:field="*{ingredients}" th:errorClass="is-invalid">
+								<!-- gestione errori -->
+								<div th:if="${#fields.hasErrors('ingredients')}" class="invalid-feedback">
+									<ul>
+										<li th:each="err : ${#fields.errors('ingredients')}" th:text="${err}"></li>
+									</ul>
+								</div>
+							</div>
+
+							<!-- DESCRIPTION -->
+							<div class="form-floating mb-3">
+								<textarea type="text" id="description" th:field="*{description}" class="form-control"
+									placeholder="Descrizione della Pizza" style="height: 200px"
+									th:errorClass="is-invalid"></textarea>
+								<label for="description">Descrizione della Pizza</label>
+								<!-- gestione errori -->
+								<div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
+									<ul>
+										<li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+									</ul>
+								</div>
+							</div>
+
+							<!-- PHOTO_URL -->
+							<div class="mb-3">
+								<label for="photoUrl" class="form-label">Indirizzo URL di una immagine</label>
+								<input type="text" class="form-control" id="photoUrl"
+									placeholder="example: http://img_name.it" th:field="*{photoUrl}"
+									th:errorClass="is-invalid">
+								<!-- gestione errori -->
+								<div th:if="${#fields.hasErrors('photoUrl')}" class="invalid-feedback">
+									<ul>
+										<li th:each="err : ${#fields.errors('photoUrl')}" th:text="${err}"></li>
+									</ul>
+								</div>
+							</div>
+
+							<!-- PRICE -->
+							<div class="mb-3">
+								<label for="price">Prezzo</label>
+								<div class="input-group">
+									<span class="input-group-text">0.00€</span>
+									<input type="number" step="0.01" class="form-control" id="price"
+										placeholder="Solo numeri interi o con la virgola" th:field="*{price}">
+								</div>
+								<!-- gestione errori -->
+								<div th:if="${#fields.hasErrors('price')}" class="invalid-feedback">
+									<ul>
+										<li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>
+									</ul>
+								</div>
+							</div>
+
+							<!-- BUTTONS -->
+							<div class="d-flex justify-content-between mb-3">
+								<button type="button" class="btn btn-primary"
+									onclick="resetFormGoHome()">Indietro</button>
+								<button type="submit" class="btn btn-primary">Crea</button>
+								<button type="button" class="btn btn-danger" onclick="resetForm()">Annulla</button>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+	</main>
+
+	<!-- FOOTER -->
+	<footer th:insert="~{fragments/footer :: footer}"></footer>
+	</div>
+	<!-- PERSONAL JS -->
+	<script th:src="@{/JS/myscript.js}"></script>
+
+	<!-- JS BOOTSTRAP -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+
+	</bodyonload="document.getElementById('pizza-form').reset();">
+	
+	</body>
+
+</html>

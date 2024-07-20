@@ -1,0 +1,20 @@
+[
+	{
+		"properties": [
+			{
+				"name": "hibernate.dialect",
+				"type": "java.lang.String",
+				"description": "A description for 'hibernate.dialect'"
+			}
+		]
+	},
+	{
+		"properties": [
+			{
+				"name": "hibernate.dialect",
+				"type": "java.lang.String",
+				"description": "A description for 'hibernate.dialect'"
+			}
+		]
+	}
+]

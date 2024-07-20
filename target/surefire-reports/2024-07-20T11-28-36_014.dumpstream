@@ -1,0 +1,5 @@
+# Created at 2024-07-20T11:28:36.351
+Boot Manifest-JAR contains absolute paths in classpath 'D:\OneDrive\09_Boolean\Lezioni_backend\Spring_MVC\Ex04_spring-la-mia-pizzeria-relazioni\spring-la-mia-pizzeria-relazioni\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+
