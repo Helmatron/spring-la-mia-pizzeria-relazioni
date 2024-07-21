@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.pizzeria.SpringLaMiaPizzeriaCrudApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.145 s -- in com.pizzeria.SpringLaMiaPizzeriaCrudApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.581 s -- in com.pizzeria.SpringLaMiaPizzeriaCrudApplicationTests

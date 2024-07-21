@@ -42,7 +42,8 @@
 					<div class="row col-12 col-sm-6 col-md-4 col-lg-5">
 
 						<!-- FORM -->
-						<form id="pizza-form" th:object="${pizza}" th:action="@{/edit_pizze/{id}(id=${pizza.id})}" method="post">
+						<form id="pizza-form" th:object="${pizza}" th:action="@{/edit_pizze/{id}(id=${pizza.id})}"
+							method="post">
 
 							<!-- NAME -->
 							<div class="mb-3">
@@ -57,20 +58,21 @@
 								</div>
 							</div>
 
-							<!-- INGREDIENTS -->
+							<!-- INGREDIENTS 
 							<div class="mb-3">
 								<label for="ingredients" class="form-label">Descrizione</label>
 								<input type="text" class="form-control" id="ingredients" placeholder="Lista ingredienti"
 									th:field="*{ingredients}" th:errorClass="is-invalid">
-								<!-- gestione errori -->
+								 gestione errori 
 								<div th:if="${#fields.hasErrors('ingredients')}" class="invalid-feedback">
 									<ul>
 										<li th:each="err : ${#fields.errors('ingredients')}" th:text="${err}"></li>
 									</ul>
 								</div>
-							</div>
+							</div> 							-->
 
 							<!-- DESCRIPTION -->
+							<label for="ingredients" class="form-label">Descrizione</label>
 							<div class="form-floating mb-3">
 								<textarea type="text" id="description" th:field="*{description}" class="form-control"
 									placeholder="Descrizione della Pizza" style="height: 200px"
@@ -114,8 +116,33 @@
 								</div>
 							</div>
 
+							<!-- APPLICA OFFERTA -->
+							<div class="mb-3">
+								<label for="specialOfferInput">Applica sconto</label>
+								<div class="input-group">
+									<div class="dropdown">
+										<button class="btn btn-warning dropdown-toggle" type="button"
+											data-bs-toggle="dropdown" aria-expanded="false">
+											Seleziona
+										</button>
+										<ul class="dropdown-menu">
+											<li th:each="offer : ${specialOffer}">
+												<button th:id="'offer-' + ${offer.id}" th:text="${offer.title}"
+													class="dropdown-item" type="button"
+													th:attr="data-title=${offer.title}"
+													th:attrappend="data-sconto=${offer.sconto}"
+													onclick="updateInput(this)">Offerta speciale</button>
+											</li>
+										</ul>
+									</div>
+									<input type="text" class="form-control" id="specialOfferInput"
+										name="specialOfferTitle">
+									<span class="input-group-text" id="specialOfferSconto">%</span>
+								</div>
+							</div>
+
 							<!-- BUTTONS -->
-							<div class="d-flex justify-content-between mb-3">
+							<div class="d-flex justify-content-between my-4">
 								<button type="button" class="btn btn-primary"
 									onclick="resetFormGoGestionale()">Indietro</button>
 								<button type="submit" class="btn btn-success">Conferma le Modifiche</button>
@@ -139,7 +166,7 @@
 		crossorigin="anonymous"></script>
 
 	</bodyonload="document.getElementById('pizza-form').reset();">
-	
+
 	</body>
 
 </html>

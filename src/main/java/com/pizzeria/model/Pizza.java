@@ -1,10 +1,13 @@
 package com.pizzeria.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
@@ -17,7 +20,7 @@ public class Pizza {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 
 	@NotBlank(message = "Il nome non può essere Null")
 	@Size(max = 50, message = "Il nome può avere massimo 50 caratteri")
@@ -29,7 +32,6 @@ public class Pizza {
 	@Column(nullable = false)
 	private String description;
 
-	@NotBlank(message = "URL non può essere Null")
 	@Size(max = 255, message = "URL può avere massimo 255 caratteri")
 	@Column(name = "photo_url")
 	private String photoUrl;
@@ -51,11 +53,11 @@ public class Pizza {
 	public Pizza() {
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -93,8 +95,21 @@ public class Pizza {
 
 	@Override
 	public String toString() {
-		return "Pizza [id=" + id + ", name=" + name + ", ingredients=" + ", description=" + description
-				+ ", photoUrl=" + photoUrl + ", price=" + price + "]";
+		return "Pizza [id=" + id + ", name=" + name + ", ingredients=" + ", description=" + description + ", photoUrl="
+				+ photoUrl + ", price=" + price + "]";
+	}
+	
+	// RELAZIONI con relativi get e set
+
+	@OneToMany(mappedBy = "pizza")
+	private List<SpecialOffer> specialOffers;
+
+	public List<SpecialOffer> getSpecialOffers() {
+		return specialOffers;
+	}
+
+	public void setSpecialOffers(List<SpecialOffer> specialOffers) {
+		this.specialOffers = specialOffers;
 	}
 
 }

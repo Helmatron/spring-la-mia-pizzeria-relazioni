@@ -19,16 +19,15 @@
 	<link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 
-<bo>
+<body>
+	<!-- CLASSE PER IMPORRE AL FOTTER DI STARE IN FONDO ALLA PAGINA -->
+	<div class="wrapper title-top-margin">
 
-	<!-- HEADER -->
-	<header th:insert="~{fragments/navbar :: navbar}"></header>
+		<!-- HEADER -->
+		<header th:insert="~{fragments/navbar :: navbar}"></header>
 
-	<!-- MAIN -->
-	<main>
-
-		<!-- CLASSE PER IMPORRE AL FOTTER DI STARE IN FONDO ALLA PAGINA -->
-		<div class="wrapper title-top-margin">
+		<!-- MAIN -->
+		<main>
 
 			<!-- TITLE -->
 			<div class="container-fluid">
@@ -56,20 +55,21 @@
 								</div>
 							</div>
 
-							<!-- INGREDIENTS -->
+							<!-- INGREDIENTS 
 							<div class="mb-3">
 								<label for="ingredients" class="form-label">Descrizione</label>
 								<input type="text" class="form-control" id="ingredients" placeholder="Lista ingredienti"
-									th:field="*{ingredients}" th:errorClass="is-invalid">
-								<!-- gestione errori -->
+									th:field="*{ingredients}" th:errorClass="is-invalid">								-->
+							<!-- gestione errori 
 								<div th:if="${#fields.hasErrors('ingredients')}" class="invalid-feedback">
 									<ul>
 										<li th:each="err : ${#fields.errors('ingredients')}" th:text="${err}"></li>
 									</ul>
 								</div>
-							</div>
+							</div>							-->
 
 							<!-- DESCRIPTION -->
+							<label for="ingredients" class="form-label">Descrizione</label>
 							<div class="form-floating mb-3">
 								<textarea type="text" id="description" th:field="*{description}" class="form-control"
 									placeholder="Descrizione della Pizza" style="height: 200px"
@@ -116,8 +116,8 @@
 							<!-- BUTTONS -->
 							<div class="d-flex justify-content-between mb-3">
 								<button type="button" class="btn btn-primary"
-									onclick="resetFormGoHome()">Indietro</button>
-								<button type="submit" class="btn btn-primary">Crea</button>
+									onclick="resetFormGoGestionale()">Indietro</button>
+								<button type="submit" class="btn btn-success">Crea</button>
 								<button type="button" class="btn btn-danger" onclick="resetForm()">Annulla</button>
 							</div>
 
@@ -125,10 +125,10 @@
 					</div>
 				</div>
 			</div>
-	</main>
+		</main>
 
-	<!-- FOOTER -->
-	<footer th:insert="~{fragments/footer :: footer}"></footer>
+		<!-- FOOTER -->
+		<footer th:insert="~{fragments/footer :: footer}"></footer>
 	</div>
 	<!-- PERSONAL JS -->
 	<script th:src="@{/JS/myscript.js}"></script>
@@ -139,7 +139,7 @@
 		crossorigin="anonymous"></script>
 
 	</bodyonload="document.getElementById('pizza-form').reset();">
-	
-	</body>
+
+</body>
 
 </html>

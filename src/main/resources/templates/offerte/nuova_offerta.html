@@ -6,7 +6,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title th:text="${pizza.name}">&hearts; Name &hearts;</title>
+	<title>&hearts; Nuova Offerta &hearts;</title>
 
 	<!-- FAVICON -->
 	<link rel="icon" th:href="@{/icon/fav_icon_pizza.png}" type="image/png">
@@ -22,7 +22,7 @@
 <body>
 
 	<!-- CLASSE PER IMPORRE AL FOTTER DI STARE IN FONDO ALLA PAGINA -->
-	<div class="wrapper	title-top-margin">
+	<div class="wrapper title-top-margin">
 
 		<!-- HEADER -->
 		<header th:insert="~{fragments/navbar :: navbar}"></header>
@@ -33,25 +33,39 @@
 			<!-- TITLE -->
 			<div class="container-fluid">
 				<div class="row my-5">
-					<h1 class="text-center" th:text="${pizza.name}"></h1>
+					<h1 class="text-center">Crea una nuova offerta!</h1>
 				</div>
 
-				<!-- DETTAGLI PIZZE -->
-				<div class="container-fluid">
-					<div class="row justify-content-center" th:if="${findPizzaById}">
-						<div class="col-md-4 mb-4 d-flex justify-content-center">
-							<div class="card shadow align-items-center" style="width: 18rem;">
-								<img th:src="${pizza.photoUrl}" class="card-img-top	myImg" alt="Immagine pizza">
-								<div class="card-body">
-									<h5 class="card-title text-center">Descrizione</h5>
-									<p class="card-text text-center" th:text="${pizza.description}">Descrizione Pizza
-									</p>
-									<div class="d-flex justify-content-center">
-										<a th:href="@{/}" class="btn btn-primary">Indietro</a>
-									</div>
+				<!-- CONTEINER FORM -->
+				<div class="d-flex justify-content-center">
+					<div class="row col-12 col-sm-6 col-md-4 col-lg-5">
+
+						<!-- FORM -->
+						<form id="specialOffer-form" th:object="${specialOffer}" th:action="@{/nuova_offerta}"
+							method="post">
+
+							<!-- TITLE -->
+							<div class="mb-3">
+								<label for="title" class="form-label">Titolo</label>
+								<input type="text" class="form-control" id="title"
+									placeholder="Nome della nuova Offerta" th:field="*{title}"
+									th:errorClass="is-invalid">
+								<!-- gestione errori -->
+								<div th:if="${#fields.hasErrors('title')}" class="invalid-feedback">
+									<ul>
+										<li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
+									</ul>
 								</div>
 							</div>
-						</div>
+
+							<!-- BUTTONS -->
+							<div class="d-flex justify-content-between mb-3">
+								<button type="button" class="btn btn-primary"
+									onclick="resetFormGoOffer()">Indietro</button>
+								<button type="submit" class="btn btn-success">Crea</button>
+								<button type="button" class="btn btn-danger" onclick="resetForm()">Annulla</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -69,6 +83,7 @@
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
 
+	</bodyonload="document.getElementById('pizza-form').reset();">
 
 </body>
 

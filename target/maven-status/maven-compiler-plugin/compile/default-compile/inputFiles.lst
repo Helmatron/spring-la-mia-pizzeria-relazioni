@@ -1,6 +1,8 @@
 D:\OneDrive\09_Boolean\Lezioni_backend\Spring_MVC\Ex04_spring-la-mia-pizzeria-relazioni\spring-la-mia-pizzeria-relazioni\src\main\java\com\pizzeria\controller\PizzaController.java
 D:\OneDrive\09_Boolean\Lezioni_backend\Spring_MVC\Ex04_spring-la-mia-pizzeria-relazioni\spring-la-mia-pizzeria-relazioni\src\main\java\com\pizzeria\model\Ingredienti.java
 D:\OneDrive\09_Boolean\Lezioni_backend\Spring_MVC\Ex04_spring-la-mia-pizzeria-relazioni\spring-la-mia-pizzeria-relazioni\src\main\java\com\pizzeria\model\Pizza.java
+D:\OneDrive\09_Boolean\Lezioni_backend\Spring_MVC\Ex04_spring-la-mia-pizzeria-relazioni\spring-la-mia-pizzeria-relazioni\src\main\java\com\pizzeria\model\SpecialOffer.java
 D:\OneDrive\09_Boolean\Lezioni_backend\Spring_MVC\Ex04_spring-la-mia-pizzeria-relazioni\spring-la-mia-pizzeria-relazioni\src\main\java\com\pizzeria\model\User.java
 D:\OneDrive\09_Boolean\Lezioni_backend\Spring_MVC\Ex04_spring-la-mia-pizzeria-relazioni\spring-la-mia-pizzeria-relazioni\src\main\java\com\pizzeria\repository\PizzaRepository.java
+D:\OneDrive\09_Boolean\Lezioni_backend\Spring_MVC\Ex04_spring-la-mia-pizzeria-relazioni\spring-la-mia-pizzeria-relazioni\src\main\java\com\pizzeria\repository\SpecialOfferRepository.java
 D:\OneDrive\09_Boolean\Lezioni_backend\Spring_MVC\Ex04_spring-la-mia-pizzeria-relazioni\spring-la-mia-pizzeria-relazioni\src\main\java\com\pizzeria\SpringLaMiaPizzeriaCrudApplication.java

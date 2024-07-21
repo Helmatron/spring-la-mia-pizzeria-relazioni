@@ -6,7 +6,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>&hearts; Gestione Pizze &hearts;</title>
+	<title>&hearts; Gestione Offerte &hearts;</title>
 
 	<!-- FAVICON -->
 	<link rel="icon" th:href="@{/icon/fav_icon_pizza.png}" type="image/png">
@@ -33,41 +33,44 @@
 			<!-- TITLE -->
 			<div class="container-fluid">
 				<div class="row mt-5">
-					<h1 class="text-center">Gestione delle Pizze</h1>
+					<h1 class="text-center">Lista dell Offerte Speciali</h1>
 				</div>
 
-				<!-- BUTTONS NUOVA PIZZA -->
+				<!-- BUTTONS NUOVA OFFERTA -->
 				<div class="text-center">
-					<a href="/nuova_pizza" class="btn btn-success my-5 shadow" style="font-size: larger;">Crea Nuova Pizza</a>
+					<a href="/offerte/nuova_offerta" class="btn btn-success my-5 shadow" style="font-size: larger;">Crea
+						Nuova Offerta</a>
 				</div>
 
 				<!-- MESSAGGIO DI ALERT -->
 				<div class="container-fluid">
 					<div class="text-center mt-5" th:if="${#lists.isEmpty(list)}">
 						<div class="alert alert-warning" role="alert">
-							Nessuna pizza trovata
+							Nessuna Offerta trovata
 						</div>
 					</div>
 				</div>
 
 				<!-- ELENCO DELLE PIZZE -->
 				<div class="row justify-content-center align-items-center" th:unless="${#lists.isEmpty(list)}">
-					<div class="col-md-4 mb-4 d-flex justify-content-center" th:each="pizza : ${list}">
-						<div class="card shadow" style="width: 18rem;">
-							<img th:src="${pizza.photoUrl}" class="card-img-top myImg" alt="Immagine pizza">
+					<div class="col-md-4 mb-4 d-flex justify-content-center" th:each="specialOffer : ${list}">
+						<div class="card shadow">
 							<div class="card-body">
-								<h5 class="card-title" th:text="${pizza.name}">Nome Pizza</h5>
-								<p class="card-text" style="font-weight: 350;" th:text="${pizza.description}">
-									descrizione</p>
-								<p class="card-text"><small class="text-muted"
-										th:text="'Prezzo: €' + ${pizza.price}">Prezzo</small></p>
+								<h4 class="card-title" th:text="${specialOffer.title}">Nome Offerta</h4>
+								<p class="card-text" th:utext="'<strong>Sconto:</strong> %' + ${specialOffer.sconto}">
+									Sconto</p>
+								<span class="card-text my-2"
+									th:utext="'<strong>Inizio:</strong> ' + ${specialOffer.startDate}">Data di
+									inizio</span>
+								<span class="card-text" style="margin-left: 15px;"
+									th:utext="'<strong>Fine:</strong> ' + ${specialOffer.endDate}">Data di fine</span>
 
 								<!-- BUTTONS -->
-								<div class="d-flex justify-content-between">
-									<a th:href="@{/edit_pizze/{id}(id=${pizza.id})}"
+								<div class="d-flex justify-content-between mt-4">
+									<a th:href="@{/offerte/edit_offerta/{id}(id=${specialOffer.id})}"
 										class="btn btn-primary">Modifica</a>
-									<form th:action="@{'/gestionale/{id}'(id=${pizza.id})}" method="post"
-										onsubmit="confirmPizzaDeletion(event, this)">
+									<form th:action="@{'/offerte/lista_offerte/{id}'(id=${specialOffer.id})}"
+										method="post" onsubmit="confirmOfferDeletion(event, this)">
 										<button type="submit" id="submitButton" class="btn btn-danger">Elimina</button>
 									</form>
 								</div>
@@ -81,6 +84,7 @@
 		<!-- FOOTER -->
 		<footer th:insert="~{fragments/footer :: footer}"></footer>
 	</div>
+
 
 	<!-- PERSONAL JS -->
 	<script th:src="@{/JS/myscript.js}"></script>

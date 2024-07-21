@@ -40,8 +40,8 @@
 				<div class="container-fluid">
 					<div class="row justify-content-center" th:if="${findPizzaById}">
 						<div class="col-md-4 mb-4 d-flex justify-content-center">
-							<div class="card align-items-center" style="width: 18rem;">
-								<img th:src="${pizza.photoUrl}" class="card-img-top" alt="Immagine pizza">
+							<div class="card shadow align-items-center" style="width: 18rem;">
+								<img th:src="${pizza.photoUrl}" class="card-img-top	myImg" alt="Immagine pizza">
 								<div class="card-body">
 									<h5 class="card-title text-center">Descrizione</h5>
 									<p class="card-text text-center" th:text="${pizza.description}">Descrizione Pizza
