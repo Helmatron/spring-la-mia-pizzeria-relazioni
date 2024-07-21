@@ -40,7 +40,7 @@
 					<div class="row col-12 col-sm-6 col-md-4 col-lg-5">
 
 						<!-- FORM -->
-						<form id="pizza-form" th:object="${pizza}" th:action="@{/nuova_pizza}" method="post">
+						<form id="pizza-form" th:object="${pizza}" th:action="@{/pizze/nuova_pizza}" method="post">
 
 							<!-- NAME -->
 							<div class="mb-3">
@@ -116,7 +116,7 @@
 							<!-- BUTTONS -->
 							<div class="d-flex justify-content-between mb-3">
 								<button type="button" class="btn btn-primary"
-									onclick="resetFormGoGestionale()">Indietro</button>
+									onclick="resetFormGoListaPizze()">Indietro</button>
 								<button type="submit" class="btn btn-success">Crea</button>
 								<button type="button" class="btn btn-danger" onclick="resetForm()">Annulla</button>
 							</div>

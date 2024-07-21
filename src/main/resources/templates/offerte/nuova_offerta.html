@@ -41,7 +41,7 @@
 					<div class="row col-12 col-sm-6 col-md-4 col-lg-5">
 
 						<!-- FORM -->
-						<form id="specialOffer-form" th:object="${specialOffer}" th:action="@{/nuova_offerta}"
+						<form id="specialOffer-form" th:object="${specialOffer}" th:action="@{/offerte/nuova_offerta}"
 							method="post">
 
 							<!-- TITLE -->
@@ -54,6 +54,45 @@
 								<div th:if="${#fields.hasErrors('title')}" class="invalid-feedback">
 									<ul>
 										<li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
+									</ul>
+								</div>
+							</div>
+
+							<!-- SCONTO -->
+							<div class="mb-3">
+								<label for="sconto" class="form-label">Sconto</label>
+								<input type="number" class="form-control" id="sconto" th:field="*{sconto}"
+									th:errorClass="is-invalid">
+								<!-- gestione errori -->
+								<div th:if="${#fields.hasErrors('sconto')}" class="invalid-feedback">
+									<ul>
+										<li th:each="err : ${#fields.errors('sconto')}" th:text="${err}"></li>
+									</ul>
+								</div>
+							</div>
+
+							<!-- DATA INIZIO -->
+							<div class="mb-3">
+								<label for="startDate" class="form-label">Data di Inizio</label>
+								<input type="date" class="form-control" id="startDate" th:field="*{startDate}"
+									th:errorClass="is-invalid">
+								<!-- gestione errori -->
+								<div th:if="${#fields.hasErrors('startDate')}" class="invalid-feedback">
+									<ul>
+										<li th:each="err : ${#fields.errors('startDate')}" th:text="${err}"></li>
+									</ul>
+								</div>
+							</div>
+
+							<!-- DATA FINE -->
+							<div class="mb-3">
+								<label for="endDate" class="form-label">Data di Fine</label>
+								<input type="date" class="form-control" id="endDate" th:field="*{endDate}"
+									th:errorClass="is-invalid">
+								<!-- gestione errori -->
+								<div th:if="${#fields.hasErrors('endDate')}" class="invalid-feedback">
+									<ul>
+										<li th:each="err : ${#fields.errors('endDate')}" th:text="${err}"></li>
 									</ul>
 								</div>
 							</div>

@@ -38,6 +38,7 @@ public class SpecialOffer {
 	@Column(name = "end_date", nullable = false)
 	private LocalDate endDate;
 
+	// RELAZIONE FK
 	@ManyToOne
 	@JoinColumn(name = "pizza_id")
 	private Pizza pizza;

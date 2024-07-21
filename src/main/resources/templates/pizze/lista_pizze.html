@@ -38,7 +38,7 @@
 
 				<!-- BUTTONS NUOVA PIZZA -->
 				<div class="text-center">
-					<a href="/nuova_pizza" class="btn btn-success my-5 shadow" style="font-size: larger;">Crea Nuova Pizza</a>
+					<a href="/pizze/nuova_pizza" class="btn btn-success my-5 shadow" style="font-size: larger;">Crea Nuova Pizza</a>
 				</div>
 
 				<!-- MESSAGGIO DI ALERT -->
@@ -64,9 +64,9 @@
 
 								<!-- BUTTONS -->
 								<div class="d-flex justify-content-between">
-									<a th:href="@{/edit_pizze/{id}(id=${pizza.id})}"
+									<a th:href="@{/pizze/edit_pizze/{id}(id=${pizza.id})}"
 										class="btn btn-primary">Modifica</a>
-									<form th:action="@{'/gestionale/{id}'(id=${pizza.id})}" method="post"
+									<form th:action="@{'/pizze/lista_pizze/{id}'(id=${pizza.id})}" method="post"
 										onsubmit="confirmPizzaDeletion(event, this)">
 										<button type="submit" id="submitButton" class="btn btn-danger">Elimina</button>
 									</form>

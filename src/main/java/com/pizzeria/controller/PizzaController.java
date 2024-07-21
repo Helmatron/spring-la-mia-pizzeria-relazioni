@@ -44,13 +44,13 @@ public class PizzaController {
 	/*
 	 * VIEW DETTAGLI PIZZE BY ID
 	 */
-	@GetMapping("/dettagli_pizze/{id}")
+	@GetMapping("/pizze/dettagli_pizze/{id}")
 	public String findPizzaById(@PathVariable("id") Long id, Model model) {
 		Pizza pizza = pizzaRepository.getReferenceById(id);
 		if (pizza != null) {
 			model.addAttribute("pizza", pizza);
 			model.addAttribute("findPizzaById", true);
-			return "dettagli_pizze";
+			return "/pizze/dettagli_pizze";
 		} else {
 
 			return "redirect:/";
@@ -77,17 +77,17 @@ public class PizzaController {
 	/*
 	 * CREAZIONE NUOVA PIZZA
 	 */
-	@GetMapping("/nuova_pizza")
+	@GetMapping("/pizze/nuova_pizza")
 	public String creaPizza(Model model) {
 		model.addAttribute("pizza", new Pizza());
-		return "nuova_pizza";
+		return "pizze/nuova_pizza";
 	}
 
-	@PostMapping("/nuova_pizza")
+	@PostMapping("/pizze/nuova_pizza")
 	public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
-			return "/nuova_pizza";
+			return "pizze/nuova_pizza";
 		}
 		pizzaRepository.save(formPizza);
 		return "redirect:/";
@@ -95,105 +95,43 @@ public class PizzaController {
 	}
 
 	/*
-	 * UPDATE PIZZE DA GESTIONALE.HTML
+	 * EDIT PIZZE DA GESTIONALE.HTML
 	 */
-	@GetMapping("/gestionale")
+	@GetMapping("/pizze/lista_pizze")
 	public String gestionale(Model model) {
 		List<Pizza> pizze = pizzaRepository.findAll();
 		model.addAttribute("list", pizze);
-		return "gestionale";
+		return "pizze/lista_pizze";
 	}
 
-	@GetMapping("/edit_pizze/{id}")
+	@GetMapping("/pizze/edit_pizze/{id}")
 	public String editPizza(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("pizza", pizzaRepository.findById(id).get());
 		List<SpecialOffer> specialOffer = specialOfferRepository.findAll();
 		model.addAttribute("specialOffer", specialOffer);
-		return "edit_pizze";
+		return "pizze/edit_pizze";
 	}
 
-	@PostMapping("/edit_pizze/{id}")
+	@PostMapping("/pizze/edit_pizze/{id}")
 	public String updatePizza(@Valid @ModelAttribute("pizza") Pizza pizza, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
-			return "/edit_pizze";
+			return "pizze/edit_pizze";
 		}
+
 		pizzaRepository.save(pizza);
-		return "redirect:/gestionale";
+		return "redirect:/pizze/lista_pizze";
 	}
 
+	
 	/*
 	 * DELETE PIZZE DA GESTIONALE.HTML
 	 */
 
-	@PostMapping("/gestionale/{id}")
+	@PostMapping("/pizze/lista_pizze/{id}")
 	public String deletePizza(@PathVariable("id") Long id) {
 		pizzaRepository.deleteById(id);
-		return "redirect:/gestionale";
-	}
-
-	/*
-	 * VIEW LISTA OFFERTE
-	 */
-
-	@GetMapping("/offerte/lista_offerte")
-	public String listaOfferte(Model model) {
-		List<SpecialOffer> specialOffer = specialOfferRepository.findAll();
-		model.addAttribute("list", specialOffer);
-		return "/offerte/lista_offerte";
-	}
-
-	/*
-	 * DELETE DELLE OFFERTE
-	 */
-
-	@PostMapping("/offerte/lista_offerte/{id}")
-	public String deleteSpecialOffer(@PathVariable("id") Long id) {
-		specialOfferRepository.deleteById(id);
-		return "redirect:/offerte/lista_offerte";
-	}
-
-	/*
-	 * CREAZIONE NUOVA OFFERTA
-	 */
-
-	@GetMapping("/offerte/nuova_offerta")
-	public String creaSpecialOffer(Model model) {
-		model.addAttribute("specialOffer", new SpecialOffer());
-		return "offerte/nuova_offerta";
-	}
-
-	@PostMapping("/offerte/nuova_offerta")
-	public String storeSpecialOffer(@Valid @ModelAttribute("specialOffer") SpecialOffer formSpecialOffer,
-			BindingResult bindingResult, Model model) {
-
-		if (bindingResult.hasErrors()) {
-			return "offerte/nuova_offerta";
-		}
-		specialOfferRepository.save(formSpecialOffer);
-		return "redirect:/lista_offerte";
-
-	}
-
-	/*
-	 * EDIT OFFERTE
-	 */
-
-	@GetMapping("/offerte/edit_offerta/{id}")
-	public String editSpecialOffer(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("pizza", specialOfferRepository.findById(id).get());
-		return "nuova_offerta";
-	}
-
-	@PostMapping("/offerte/nuova_offerta/{id}")
-	public String updateSpecialOffer(@Valid @ModelAttribute("pizza") SpecialOffer formSpecialOffer,
-			BindingResult bindingResult, Model model) {
-
-		if (bindingResult.hasErrors()) {
-			return "/offerte/nuova_offerta";
-		}
-		specialOfferRepository.save(formSpecialOffer);
-		return "redirect:/gestionale";
+		return "redirect:/pizze/lista_pizze";
 	}
 
 }

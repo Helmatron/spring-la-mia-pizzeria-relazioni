@@ -2,7 +2,7 @@ console.log("JS Pizzeria Collegato!");
 
 function resetForm() {
 	document.getElementById("pizza-form").reset();
-	window.location.href = '/nuova_pizza';
+	window.location.href = '/pizze/nuova_pizza';
 };
 
 function resetFormGoHome() {
@@ -10,9 +10,9 @@ function resetFormGoHome() {
 	window.location.href = '/';
 };
 
-function resetFormGoGestionale() {
+function resetFormGoListaPizze() {
 	document.getElementById("pizza-form").reset();
-	window.location.href = '/gestionale';
+	window.location.href = '/pizze/lista_pizze';
 };
 
 function resetFormGoOffer() {

@@ -6,7 +6,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>&hearts; Modifica &hearts;</title>
+	<title>&hearts; Modifica Pizza &hearts;</title>
 
 	<!-- FAVICON -->
 	<link rel="icon" th:href="@{/icon/fav_icon_pizza.png}" type="image/png">
@@ -19,7 +19,7 @@
 	<link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 
-<bo>
+<body>
 
 	<!-- HEADER -->
 	<header th:insert="~{fragments/navbar :: navbar}"></header>
@@ -42,7 +42,7 @@
 					<div class="row col-12 col-sm-6 col-md-4 col-lg-5">
 
 						<!-- FORM -->
-						<form id="pizza-form" th:object="${pizza}" th:action="@{/edit_pizze/{id}(id=${pizza.id})}"
+						<form id="pizza-form" th:object="${pizza}" th:action="@{/pizze/edit_pizze/{id}(id=${pizza.id})}"
 							method="post">
 
 							<!-- NAME -->
@@ -144,10 +144,9 @@
 							<!-- BUTTONS -->
 							<div class="d-flex justify-content-between my-4">
 								<button type="button" class="btn btn-primary"
-									onclick="resetFormGoGestionale()">Indietro</button>
+									onclick="resetFormGoListaPizze()">Indietro</button>
 								<button type="submit" class="btn btn-success">Conferma le Modifiche</button>
 							</div>
-
 						</form>
 					</div>
 				</div>
