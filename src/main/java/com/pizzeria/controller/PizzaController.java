@@ -106,24 +106,39 @@ public class PizzaController {
 
 	@GetMapping("/pizze/edit_pizze/{id}")
 	public String editPizza(@PathVariable("id") Long id, Model model) {
+		
 		model.addAttribute("pizza", pizzaRepository.findById(id).get());
+		
 		List<SpecialOffer> specialOffer = specialOfferRepository.findAll();
 		model.addAttribute("specialOffer", specialOffer);
+		
 		return "pizze/edit_pizze";
 	}
 
 	@PostMapping("/pizze/edit_pizze/{id}")
-	public String updatePizza(@Valid @ModelAttribute("pizza") Pizza pizza, BindingResult bindingResult, Model model) {
+	public String updatePizza(@Valid @ModelAttribute("pizza") Pizza pizza,
+			@RequestParam(name = "offerId", required = false) String offerId, // Usa String per permettere valori vuoti
+			BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
+			model.addAttribute("specialOffer", specialOfferRepository.findAll()); // Ripopola le offerte in caso di
+																					// errore
 			return "pizze/edit_pizze";
+		}
+
+		if (offerId == null || offerId.isEmpty()) {
+			pizza.setSpecialOffer(null); // Rimuove l'offerta se offerId è vuoto
+		} else {
+			Long offerIdLong = Long.parseLong(offerId); // conversione della Stringa in Long
+			SpecialOffer offer = specialOfferRepository.findById(offerIdLong)
+					.orElseThrow(() -> new IllegalArgumentException("Invalid offer Id:" + offerId));
+			pizza.setSpecialOffer(offer); // Imposta l'offerta speciale sulla pizza
 		}
 
 		pizzaRepository.save(pizza);
 		return "redirect:/pizze/lista_pizze";
 	}
 
-	
 	/*
 	 * DELETE PIZZE DA GESTIONALE.HTML
 	 */

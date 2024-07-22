@@ -38,9 +38,21 @@ function confirmPizzaDeletion(event, form) {
 }
 
 // Selettore per le offerte
-function updateInput(button) {
-            const title = button.getAttribute('data-title');
-            const sconto = button.getAttribute('data-sconto');
-            document.getElementById('specialOfferInput').value = title;
-            document.getElementById('specialOfferSconto').innerText = '%' + sconto;
-        }
+function updateInput(element) {
+	var title = element.getAttribute('data-title');
+	var sconto = element.getAttribute('data-sconto');
+	var offerId = element.getAttribute('data-id');
+
+	document.getElementById('specialOfferInput').value = title;
+	document.getElementById('specialOfferSconto').textContent = sconto + '%';
+	document.getElementById('specialOfferId').value = offerId; // Aggiorna il campo nascosto con l'ID dell'offerta
+}
+
+// Elimina collegamento offerta/pizza
+function removeOffer() {
+	document.getElementById('specialOfferInput').value = "Nessuna Offerta";
+	document.getElementById('specialOfferSconto').textContent = '';
+	document.getElementById('specialOfferId').value = ''; // Imposta l'ID dell'offerta a null
+}
+
+//Funzione prezzo scontato

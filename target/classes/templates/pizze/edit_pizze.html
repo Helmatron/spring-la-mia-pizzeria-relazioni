@@ -118,7 +118,9 @@
 
 							<!-- APPLICA OFFERTA -->
 							<div class="mb-3">
-								<label for="specialOfferInput">Applica sconto</label>
+								<label for="specialOfferInput"
+									th:text="${pizza.specialOffer != null} ? 'Sconto applicato: ' + ${pizza.specialOffer.title} : 'Sconto applicato: Nessuna offerta'">Applica
+									sconto</label> <!-- Modifica qui -->
 								<div class="input-group">
 									<div class="dropdown">
 										<button class="btn btn-warning dropdown-toggle" type="button"
@@ -126,17 +128,22 @@
 											Seleziona
 										</button>
 										<ul class="dropdown-menu">
+											<li>
+												<button class="dropdown-item" type="button"
+													onclick="removeOffer()">Rimuovi Offerta</button>
+											</li>
 											<li th:each="offer : ${specialOffer}">
 												<button th:id="'offer-' + ${offer.id}" th:text="${offer.title}"
 													class="dropdown-item" type="button"
-													th:attr="data-title=${offer.title}"
-													th:attrappend="data-sconto=${offer.sconto}"
+													th:attr="data-title=${offer.title}, data-sconto=${offer.sconto}, data-id=${offer.id}"
 													onclick="updateInput(this)">Offerta speciale</button>
 											</li>
 										</ul>
 									</div>
 									<input type="text" class="form-control" id="specialOfferInput"
-										name="specialOfferTitle">
+										name="specialOfferTitle" readonly>
+									<input type="hidden" id="specialOfferId" name="offerId">
+									<!-- Campo nascosto per memorizzare l'ID dell'offerta -->
 									<span class="input-group-text" id="specialOfferSconto">%</span>
 								</div>
 							</div>
@@ -166,6 +173,6 @@
 
 	</bodyonload="document.getElementById('pizza-form').reset();">
 
-	</body>
+</body>
 
 </html>

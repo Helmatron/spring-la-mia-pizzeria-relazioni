@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
@@ -98,18 +100,18 @@ public class Pizza {
 		return "Pizza [id=" + id + ", name=" + name + ", ingredients=" + ", description=" + description + ", photoUrl="
 				+ photoUrl + ", price=" + price + "]";
 	}
-	
-	// RELAZIONI con relativi get e set
 
-	@OneToMany(mappedBy = "pizza")
-	private List<SpecialOffer> specialOffers;
+	// RELAZIONE FK
+	@ManyToOne
+	@JoinColumn(name = "special_offer_id")
+	private SpecialOffer specialOffer;
 
-	public List<SpecialOffer> getSpecialOffers() {
-		return specialOffers;
+	public SpecialOffer getSpecialOffer() {
+		return specialOffer;
 	}
 
-	public void setSpecialOffers(List<SpecialOffer> specialOffers) {
-		this.specialOffers = specialOffers;
+	public void setSpecialOffer(SpecialOffer specialOffer) {
+		this.specialOffer = specialOffer;
 	}
 
 }

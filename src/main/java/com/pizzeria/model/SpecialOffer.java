@@ -1,6 +1,7 @@
 package com.pizzeria.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -38,17 +40,16 @@ public class SpecialOffer {
 	@Column(name = "end_date", nullable = false)
 	private LocalDate endDate;
 
-	// RELAZIONE FK
-	@ManyToOne
-	@JoinColumn(name = "pizza_id")
-	private Pizza pizza;
-
-	public SpecialOffer(String title, int sconto, LocalDate startDate, LocalDate endDate, Pizza pizza) {
+	public SpecialOffer(String title, int sconto, LocalDate startDate, LocalDate endDate) {
 		super();
 		this.title = title;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.pizza = pizza;
+	}
+
+	public SpecialOffer(int sconto) {
+		super();
+		this.sconto = sconto;
 	}
 
 	public SpecialOffer() {
@@ -95,19 +96,24 @@ public class SpecialOffer {
 		this.endDate = endDate;
 	}
 
-	// get e set del JOIN COLUMN
-	public Pizza getPizza() {
-		return pizza;
+	// RELAZIONI con relativi get e set
+
+	@OneToMany(mappedBy = "specialOffer")
+	private List<Pizza> pizzas;
+
+
+	public List<Pizza> getPizzas() {
+		return pizzas;
 	}
 
-	public void setPizza(Pizza pizza) {
-		this.pizza = pizza;
+	public void setPizzas(List<Pizza> pizzas) {
+		this.pizzas = pizzas;
 	}
 
 	@Override
 	public String toString() {
 		return "SpecialOffer [id=" + id + ", title=" + title + ", sconto=" + sconto + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", pizza=" + pizza + "]";
+				+ ", endDate=" + endDate + "]";
 	}
 
 }
