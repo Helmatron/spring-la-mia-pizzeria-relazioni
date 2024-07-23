@@ -72,9 +72,7 @@
 
 							<!-- DATA INIZIO -->
 							<div class="mb-3">
-								<label for="startDate" class="form-label"
-									th:utext="'<strong>Data di inizio:</strong> ' + ${specialOffer.startDate}">Data di
-									Inizio</label>
+								<label for="startDate" class="form-label">Data di Inizio</label>
 								<input type="date" class="form-control" id="startDate" th:field="*{startDate}"
 									th:errorClass="is-invalid">
 								<!-- gestione errori -->
@@ -87,7 +85,7 @@
 
 							<!-- DATA FINE -->
 							<div class="mb-3">
-								<label for="endDate" class="form-label"	th:utext="'<strong>Data di fine:</strong> ' + ${specialOffer.endDate}">Data di Fine</label>
+								<label for="endDate" class="form-label">Data di Fine</label>
 								<input type="date" class="form-control" id="endDate" th:field="*{endDate}"
 									th:errorClass="is-invalid">
 								<!-- gestione errori -->
@@ -95,15 +93,6 @@
 									<ul>
 										<li th:each="err : ${#fields.errors('endDate')}" th:text="${err}"></li>
 									</ul>
-								</div>
-							</div>
-
-							<!-- AVVISO DATE -->
-							<div class="container-fluid">
-								<div class="text-center my-4">
-									<div class="alert alert-warning" role="alert">
-										Prima di confermare la modifica è necessario reinserire data di inzio e di fine
-									</div>
 								</div>
 							</div>
 
