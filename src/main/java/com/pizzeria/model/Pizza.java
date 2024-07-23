@@ -8,8 +8,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
@@ -101,7 +102,7 @@ public class Pizza {
 				+ photoUrl + ", price=" + price + "]";
 	}
 
-	// RELAZIONE FK
+	// RELAZIONE SPECIAL OFFER FK
 	@ManyToOne
 	@JoinColumn(name = "special_offer_id")
 	private SpecialOffer specialOffer;
@@ -112,6 +113,19 @@ public class Pizza {
 
 	public void setSpecialOffer(SpecialOffer specialOffer) {
 		this.specialOffer = specialOffer;
+	}
+
+	// RELAZIONE INGREDIENTI
+	@ManyToMany
+	@JoinTable(name = "pizza_ingredienti", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "ingredienti_id"))
+	private List<Ingredienti> ingredienti;
+
+	public List<Ingredienti> getIngredienti() {
+		return ingredienti;
+	}
+
+	public void setIngredienti(List<Ingredienti> ingredienti) {
+		this.ingredienti = ingredienti;
 	}
 
 }

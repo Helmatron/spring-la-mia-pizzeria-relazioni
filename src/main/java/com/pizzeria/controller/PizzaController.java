@@ -111,7 +111,6 @@ public class PizzaController {
 		
 		List<SpecialOffer> specialOffer = specialOfferRepository.findAll();
 		model.addAttribute("specialOffer", specialOffer);
-		
 		return "pizze/edit_pizze";
 	}
 
@@ -121,8 +120,7 @@ public class PizzaController {
 			BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("specialOffer", specialOfferRepository.findAll()); // Ripopola le offerte in caso di
-																					// errore
+			model.addAttribute("specialOffer", specialOfferRepository.findAll()); // Ripopola le offerte in caso di errore
 			return "pizze/edit_pizze";
 		}
 

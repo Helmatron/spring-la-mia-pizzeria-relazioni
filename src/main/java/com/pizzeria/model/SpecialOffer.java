@@ -3,6 +3,8 @@ package com.pizzeria.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,10 +34,12 @@ public class SpecialOffer {
 	@NotNull(message = "lo sconto non può essere null")
 	private int sconto;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "La data di inizio non può essere null")
 	@Column(name = "start_date", nullable = false)
 	private LocalDate startDate;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "La data di fine non può essere null")
 	@Column(name = "end_date", nullable = false)
 	private LocalDate endDate;
