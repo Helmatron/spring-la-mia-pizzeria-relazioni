@@ -55,19 +55,6 @@
 								</div>
 							</div>
 
-							<!-- INGREDIENTS -->
-							<div class="mb-3">
-								<label for="ingredients" class="form-label">Descrizione</label>
-								<input type="text" class="form-control" id="ingredients" placeholder="Lista ingredienti"
-									th:field="*{ingredients}" th:errorClass="is-invalid">								-->
-							<!-- gestione errori -->
-								<div th:if="${#fields.hasErrors('ingredients')}" class="invalid-feedback">
-									<ul>
-										<li th:each="err : ${#fields.errors('ingredients')}" th:text="${err}"></li>
-									</ul>
-								</div>
-							</div>							
-
 							<!-- DESCRIPTION -->
 							<label for="ingredients" class="form-label">Descrizione</label>
 							<div class="form-floating mb-3">
@@ -83,43 +70,69 @@
 								</div>
 							</div>
 
-							<!-- PHOTO_URL -->
+							<!-- SELEZIONA INGREDIENTI -->
 							<div class="mb-3">
-								<label for="photoUrl" class="form-label">Indirizzo URL di una immagine</label>
-								<input type="text" class="form-control" id="photoUrl"
-									placeholder="example: http://img_name.it" th:field="*{photoUrl}"
-									th:errorClass="is-invalid">
-								<!-- gestione errori -->
-								<div th:if="${#fields.hasErrors('photoUrl')}" class="invalid-feedback">
-									<ul>
-										<li th:each="err : ${#fields.errors('photoUrl')}" th:text="${err}"></li>
-									</ul>
+								<label for="ingredients" class="form-label">Ingredienti</label>
+								<div class="dropdown">
+									<button class="btn btn-warning dropdown-toggle" type="button"
+										data-bs-toggle="dropdown" aria-expanded="false">
+										Seleziona Ingredienti
+									</button>
+									<div class="dropdown-menu p-3">
+										<div class="container">
+											<div class="row">
+												<div class="col-12 col-md-4" th:each="ingredient : ${ingredient}">
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox"
+															th:id="'ingredient-' + ${ingredient.id}"
+															th:name="ingredientId" th:value="${ingredient.id}">
+														<label class="form-check-label"
+															th:for="'ingredient-' + ${ingredient.id}"
+															th:text="${ingredient.name}">Ingrediente</label>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
-							</div>
 
-							<!-- PRICE -->
-							<div class="mb-3">
-								<label for="price">Prezzo</label>
-								<div class="input-group">
-									<span class="input-group-text">0.00€</span>
-									<input type="number" step="0.01" class="form-control" id="price"
-										placeholder="Solo numeri interi o con la virgola" th:field="*{price}">
+								<!-- PHOTO_URL -->
+								<div class="mb-3">
+									<label for="photoUrl" class="form-label">Indirizzo URL di una immagine</label>
+									<input type="text" class="form-control" id="photoUrl"
+										placeholder="example: http://img_name.it" th:field="*{photoUrl}"
+										th:errorClass="is-invalid">
+									<!-- gestione errori -->
+									<div th:if="${#fields.hasErrors('photoUrl')}" class="invalid-feedback">
+										<ul>
+											<li th:each="err : ${#fields.errors('photoUrl')}" th:text="${err}"></li>
+										</ul>
+									</div>
 								</div>
-								<!-- gestione errori -->
-								<div th:if="${#fields.hasErrors('price')}" class="invalid-feedback">
-									<ul>
-										<li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>
-									</ul>
-								</div>
-							</div>
 
-							<!-- BUTTONS -->
-							<div class="d-flex justify-content-between mb-3">
-								<button type="button" class="btn btn-primary"
-									onclick="resetFormGoListaPizze()">Indietro</button>
-								<button type="submit" class="btn btn-success">Crea</button>
-								<button type="button" class="btn btn-danger" onclick="resetForm()">Annulla</button>
-							</div>
+								<!-- PRICE -->
+								<div class="mb-3">
+									<label for="price">Prezzo</label>
+									<div class="input-group">
+										<span class="input-group-text">0.00€</span>
+										<input type="number" step="0.01" class="form-control" id="price"
+											placeholder="Solo numeri interi o con la virgola" th:field="*{price}">
+									</div>
+									<!-- gestione errori -->
+									<div th:if="${#fields.hasErrors('price')}" class="invalid-feedback">
+										<ul>
+											<li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>
+										</ul>
+									</div>
+								</div>
+
+								<!-- BUTTONS -->
+								<div class="d-flex justify-content-between mb-3">
+									<button type="button" class="btn btn-primary"
+										onclick="resetFormGoListaPizze()">Indietro</button>
+									<button type="submit" class="btn btn-success">Crea</button>
+									<button type="button" class="btn btn-danger" onclick="resetForm()">Annulla</button>
+								</div>
 
 						</form>
 					</div>

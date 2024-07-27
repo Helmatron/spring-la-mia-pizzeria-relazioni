@@ -1,4 +1,32 @@
-# la-mia-pizzzeria-relazioni
+# la-mia-pizzzeria-relazioni_MySQL DataBase
+
+## Index
+![Copertina del progetto](./readme_img/index.png)
+
+## Index
+![Copertina del progetto](./readme_img/gestione_pizze.png)
+
+## Index
+![Copertina del progetto](./readme_img/gestione_offerte.png)
+
+## Index
+![Copertina del progetto](./readme_img/gestione_ingredienti.png)
+
+## Index
+![Copertina del progetto](./readme_img/nuova_pizza.png)
+
+## Index
+![Copertina del progetto](./readme_img/nuova_offerta.png)
+
+## Index
+![Copertina del progetto](./readme_img/nuovo_ingrediente.png)
+
+## Index
+![Copertina del progetto](./readme_img/modifica_pizza.png)
+
+## Index
+![Copertina del progetto](./readme_img/modifica_offerta.png)
+
 
 ## Esercizio di oggi: Spring La Mia Pizzeria Relazioni
 ___________________________________________________________________________________________________
