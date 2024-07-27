@@ -3,28 +3,28 @@
 ## Index
 ![Copertina del progetto](./readme_img/index.png)
 
-## Index
+## Gestione Pizze
 ![Copertina del progetto](./readme_img/gestione_pizze.png)
 
-## Index
+## Gestione Offerte
 ![Copertina del progetto](./readme_img/gestione_offerte.png)
 
-## Index
+## Gestione Ingredienti
 ![Copertina del progetto](./readme_img/gestione_ingredienti.png)
 
-## Index
+## Nuova Pizza
 ![Copertina del progetto](./readme_img/nuova_pizza.png)
 
-## Index
+## Nuova Offerta
 ![Copertina del progetto](./readme_img/nuova_offerta.png)
 
-## Index
+## Nuovo Ingrediente
 ![Copertina del progetto](./readme_img/nuovo_ingrediente.png)
 
-## Index
+## Modifica Pizza
 ![Copertina del progetto](./readme_img/modifica_pizza.png)
 
-## Index
+## Modifica offerta
 ![Copertina del progetto](./readme_img/modifica_offerta.png)
 
 
