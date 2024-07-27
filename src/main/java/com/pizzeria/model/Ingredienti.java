@@ -20,7 +20,7 @@ public class Ingredienti {
 	private Long id;
 
 	@NotBlank(message = "Il nome non può essere Null")
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String name;
 
 	public Long getId() {
@@ -31,11 +31,11 @@ public class Ingredienti {
 		this.id = id;
 	}
 
-	public String getNome() {
+	public String getName() {
 		return name;
 	}
 
-	public void setNome(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 

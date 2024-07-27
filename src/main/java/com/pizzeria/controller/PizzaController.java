@@ -2,7 +2,6 @@ package com.pizzeria.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.pizzeria.model.Ingredienti;
 import com.pizzeria.model.Pizza;
 import com.pizzeria.model.SpecialOffer;
+import com.pizzeria.repository.IngredientiRepository;
 import com.pizzeria.repository.PizzaRepository;
 import com.pizzeria.repository.SpecialOfferRepository;
 
@@ -31,6 +32,9 @@ public class PizzaController {
 	@Autowired
 	private SpecialOfferRepository specialOfferRepository;
 
+	@Autowired
+	private IngredientiRepository ingredientRepository;
+
 	/*
 	 * VIEW INDEX PIZZERIA
 	 */
@@ -38,6 +42,8 @@ public class PizzaController {
 	public String index(Model model) {
 		List<Pizza> pizze = pizzaRepository.findAll();
 		model.addAttribute("list", pizze);
+		List<Ingredienti> ingredient = ingredientRepository.findAllByOrderByNameAsc();
+		model.addAttribute("ingredient", ingredient);
 		return "index";
 	}
 
@@ -79,23 +85,37 @@ public class PizzaController {
 	 */
 	@GetMapping("/pizze/nuova_pizza")
 	public String creaPizza(Model model) {
+
 		model.addAttribute("pizza", new Pizza());
+
+		List<Ingredienti> ingredient = ingredientRepository.findAllByOrderByNameAsc();
+		model.addAttribute("ingredient", ingredient);
+
 		return "pizze/nuova_pizza";
 	}
 
 	@PostMapping("/pizze/nuova_pizza")
-	public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
+	public String store(@Valid @ModelAttribute("pizza") Pizza formPizza,
+			@RequestParam(name = "ingredientId", required = false) List<Long> ingredientId, BindingResult bindingResult,
+			Model model) {
 
 		if (bindingResult.hasErrors()) {
+			model.addAttribute("ingredient", ingredientRepository.findAllByOrderByNameAsc());
 			return "pizze/nuova_pizza";
 		}
+		if (ingredientId != null) {
+	        List<Ingredienti> selectedIngredients = ingredientRepository.findAllById(ingredientId);
+	        formPizza.setIngredienti(selectedIngredients);
+	    } else {
+	    	formPizza.setIngredienti(null);
+	    }
 		pizzaRepository.save(formPizza);
-		return "redirect:/";
+		return "redirect:/pizze/lista_pizze";
 
 	}
 
 	/*
-	 * EDIT PIZZE DA GESTIONALE.HTML
+	 * EDIT PIZZE DA LISTA PIZZE
 	 */
 	@GetMapping("/pizze/lista_pizze")
 	public String gestionale(Model model) {
@@ -106,31 +126,42 @@ public class PizzaController {
 
 	@GetMapping("/pizze/edit_pizze/{id}")
 	public String editPizza(@PathVariable("id") Long id, Model model) {
-		
 		model.addAttribute("pizza", pizzaRepository.findById(id).get());
-		
+
 		List<SpecialOffer> specialOffer = specialOfferRepository.findAll();
 		model.addAttribute("specialOffer", specialOffer);
+
+		List<Ingredienti> ingredient = ingredientRepository.findAllByOrderByNameAsc();
+		model.addAttribute("ingredient", ingredient);
 		return "pizze/edit_pizze";
 	}
 
 	@PostMapping("/pizze/edit_pizze/{id}")
 	public String updatePizza(@Valid @ModelAttribute("pizza") Pizza pizza,
-			@RequestParam(name = "offerId", required = false) String offerId, // Usa String per permettere valori vuoti
-			BindingResult bindingResult, Model model) {
+			@RequestParam(name = "offerId", required = false) String offerId,
+			@RequestParam(name = "ingredientId", required = false) List<Long> ingredientId, BindingResult bindingResult,
+			Model model) {
 
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("specialOffer", specialOfferRepository.findAll()); // Ripopola le offerte in caso di errore
+			model.addAttribute("specialOffer", specialOfferRepository.findAll());
+			model.addAttribute("ingredient", ingredientRepository.findAllByOrderByNameAsc());
 			return "pizze/edit_pizze";
 		}
 
 		if (offerId == null || offerId.isEmpty()) {
-			pizza.setSpecialOffer(null); // Rimuove l'offerta se offerId è vuoto
+			pizza.setSpecialOffer(null);
 		} else {
-			Long offerIdLong = Long.parseLong(offerId); // conversione della Stringa in Long
+			Long offerIdLong = Long.parseLong(offerId);
 			SpecialOffer offer = specialOfferRepository.findById(offerIdLong)
 					.orElseThrow(() -> new IllegalArgumentException("Invalid offer Id:" + offerId));
-			pizza.setSpecialOffer(offer); // Imposta l'offerta speciale sulla pizza
+			pizza.setSpecialOffer(offer);
+		}
+
+		if (ingredientId != null) {
+			List<Ingredienti> selectedIngredients = ingredientRepository.findAllById(ingredientId);
+			pizza.setIngredienti(selectedIngredients);
+		} else {
+			pizza.setIngredienti(null);
 		}
 
 		pizzaRepository.save(pizza);

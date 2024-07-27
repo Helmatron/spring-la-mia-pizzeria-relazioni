@@ -20,6 +20,10 @@ function resetFormGoOffer() {
 	window.location.href = '/offerte/lista_offerte';
 };
 
+function resetFormGoIngredients() {
+	document.getElementById("ingredient-form").reset();
+	window.location.href = '/ingredients/lista_ingredienti';
+};
 
 // Avviso prima del submit di cancellazione Offerta
 function confirmOfferDeletion(event, form) {
@@ -55,4 +59,9 @@ function removeOffer() {
 	document.getElementById('specialOfferId').value = ''; // Imposta l'ID dell'offerta a null
 }
 
-//Funzione prezzo scontato
+// Avviso prima del submit di cancellazione Ingrediente
+function confirmIngredintDeletion(event, form) {
+    if (!confirm('Sei sicuro di voler eliminare questo ingrediente?')) {
+        event.preventDefault();
+    }
+}

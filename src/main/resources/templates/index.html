@@ -51,6 +51,7 @@
 							<img th:src="${pizza.photoUrl}" class="card-img-top myImg" alt="Immagine pizza">
 							<div class="card-body">
 								<h5 class="card-title" th:text="${pizza.name}">Nome Pizza</h5>
+								<p class="card-text" th:text="${pizza.getIngredientiAsString()}">Ingredienti della Pizza</p>
 								<p class="card-text"><small class="text-muted"
 										th:text="'Prezzo: €' + ${pizza.price}">Prezzo</small></p>
 								<a th:href="@{/pizze/dettagli_pizze/{id}(id=${pizza.id})}"

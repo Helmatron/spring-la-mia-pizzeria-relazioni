@@ -6,7 +6,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>&hearts; Pizzeria BY Ema &hearts;</title>
+	<title>&hearts; Gestione Ingredienti &hearts;</title>
 
 	<!-- FAVICON -->
 	<link rel="icon" th:href="@{/icon/fav_icon_pizza.png}" type="image/png">
@@ -33,31 +33,38 @@
 			<!-- TITLE -->
 			<div class="container-fluid">
 				<div class="row my-5">
-					<h1 class="text-center">Le Nostre Pizze</h1>
+					<h1 class="text-center">Lista degli ingredienti</h1>
 				</div>
+
+				<!-- BUTTONS NUOVA OFFERTA -->
+				<div class="text-center">
+					<a href="/ingredients/nuovo_ingrediente" class="btn btn-success mb-5 shadow"
+						style="font-size: larger;">Aggiungi un nuovo ingrediente</a>
+				</div>
+
 				<!-- MESSAGGIO DI ALERT -->
 				<div class="container-fluid">
-					<div class="text-center mt-5" th:if="${#lists.isEmpty(list)}">
+					<div class="text-center mt-5" th:if="${#lists.isEmpty(ingredientList)}">
 						<div class="alert alert-warning" role="alert">
-							Nessuna pizza trovata
+							Nessun Ingrediente trovato
 						</div>
 					</div>
 				</div>
 
-				<!-- ELENCO DELLE PIZZE -->
-				<div class="row justify-content-center align-items-center" th:unless="${#lists.isEmpty(list)}">
-					<div class="col-md-4 mb-4 d-flex justify-content-center" th:each="pizza : ${list}">
-						<div class="card shadow" style="width: 18rem;">
-							<img th:src="${pizza.photoUrl}" class="card-img-top myImg" alt="Immagine pizza">
-							<div class="card-body">
-								<h5 class="card-title" th:text="${pizza.name}">Nome Pizza</h5>
-								<p class="card-text" th:text="${pizza.getIngredientiAsString()}">Ingredienti della Pizza</p>
-								<p class="card-text"><small class="text-muted"
-										th:text="'Prezzo: €' + ${pizza.price}">Prezzo</small></p>
-								<a th:href="@{/pizze/dettagli_pizze/{id}(id=${pizza.id})}"
-									class="btn btn-primary">Dettagli</a>
-							</div>
-						</div>
+				<!-- lISTA INGREDIENTI -->
+				<div class="d-flex justify-content-center mb-5" th:unless="${#lists.isEmpty(ingredientList)}">
+					<div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 shadow">
+						<ul class="list-group">
+							<li class="list-group-item d-flex justify-content-between align-items-center"
+								th:each="ingredient : ${ingredientList}">
+								<span th:text="${ingredient.name}">Ingrediente</span>
+								<form th:action="@{'/ingredients/lista_ingredienti/{id}'(id=${ingredient.id})}"
+									method="post" onsubmit="confirmIngredintDeletion(event, this)">
+									<button type="submit" id="submitButton"
+										class="btn">&#10060;</button>
+								</form>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -66,6 +73,7 @@
 		<!-- FOOTER -->
 		<footer th:insert="~{fragments/footer :: footer}"></footer>
 	</div>
+
 
 	<!-- PERSONAL JS -->
 	<script th:src="@{/JS/myscript.js}"></script>

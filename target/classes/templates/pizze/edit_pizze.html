@@ -1,6 +1,5 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="it">
-
 <!-- HEAD -->
 
 <head>
@@ -26,31 +25,21 @@
 
 	<!-- MAIN -->
 	<main>
-
-		<!-- CLASSE PER IMPORRE AL FOTTER DI STARE IN FONDO ALLA PAGINA -->
 		<div class="wrapper title-top-margin">
-
-			<!-- TITLE -->
 			<div class="container-fluid">
 				<div class="row my-5">
 					<h1 class="text-center">Modifica la Pizza</h1>
 					<h2 class="text-center fontStyle" style="margin-top: 20px;" th:text="${pizza.name}">Name</h2>
 				</div>
-
-				<!-- CONTEINER FORM -->
 				<div class="d-flex justify-content-center">
 					<div class="row col-12 col-sm-6 col-md-4 col-lg-5">
-
-						<!-- FORM -->
 						<form id="pizza-form" th:object="${pizza}" th:action="@{/pizze/edit_pizze/{id}(id=${pizza.id})}"
 							method="post">
-
 							<!-- NAME -->
 							<div class="mb-3">
 								<label for="name" class="form-label">Nome</label>
 								<input type="text" class="form-control" id="name" placeholder="Nome della nuova Pizza"
 									th:field="*{name}" th:errorClass="is-invalid">
-								<!-- gestione errori -->
 								<div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
 									<ul>
 										<li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
@@ -58,31 +47,46 @@
 								</div>
 							</div>
 
-							<!-- INGREDIENTS 
-							<div class="mb-3">
-								<label for="ingredients" class="form-label">Descrizione</label>
-								<input type="text" class="form-control" id="ingredients" placeholder="Lista ingredienti"
-									th:field="*{ingredients}" th:errorClass="is-invalid">
-								 gestione errori 
-								<div th:if="${#fields.hasErrors('ingredients')}" class="invalid-feedback">
-									<ul>
-										<li th:each="err : ${#fields.errors('ingredients')}" th:text="${err}"></li>
-									</ul>
-								</div>
-							</div> 							-->
-
 							<!-- DESCRIPTION -->
-							<label for="ingredients" class="form-label">Descrizione</label>
+							<label for="description" class="form-label">Descrizione</label>
 							<div class="form-floating mb-3">
 								<textarea type="text" id="description" th:field="*{description}" class="form-control"
 									placeholder="Descrizione della Pizza" style="height: 200px"
 									th:errorClass="is-invalid"></textarea>
 								<label for="description">Descrizione della Pizza</label>
-								<!-- gestione errori -->
 								<div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
 									<ul>
 										<li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
 									</ul>
+								</div>
+							</div>
+
+							<!-- SELEZIONA INGREDIENTI -->
+							<div class="mb-3">
+								<label for="ingredients">Ingredienti</label>
+								<div class="dropdown">
+									<button class="btn btn-warning dropdown-toggle" type="button"
+										data-bs-toggle="dropdown" aria-expanded="false">
+										Seleziona Ingredienti
+									</button>
+									<div class="dropdown-menu p-3">
+										<div class="container">
+											<div class="row">
+												<div class="col-12 col-md-4"
+													th:each="ingredient, iterStat : ${ingredient}">
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox"
+															th:id="'ingredient-' + ${ingredient.id}"
+															th:name="ingredientId" th:value="${ingredient.id}"
+															th:checked="${pizza.ingredienti.contains(ingredient)}">
+														<label class="form-check-label"
+															th:for="'ingredient-' + ${ingredient.id}"
+															th:text="${ingredient.name}">Ingrediente</label>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 
@@ -92,7 +96,6 @@
 								<input type="text" class="form-control" id="photoUrl"
 									placeholder="example: http://img_name.it" th:field="*{photoUrl}"
 									th:errorClass="is-invalid">
-								<!-- gestione errori -->
 								<div th:if="${#fields.hasErrors('photoUrl')}" class="invalid-feedback">
 									<ul>
 										<li th:each="err : ${#fields.errors('photoUrl')}" th:text="${err}"></li>
@@ -108,7 +111,6 @@
 									<input type="number" step="0.01" class="form-control" id="price"
 										placeholder="Solo numeri interi o con la virgola" th:field="*{price}">
 								</div>
-								<!-- gestione errori -->
 								<div th:if="${#fields.hasErrors('price')}" class="invalid-feedback">
 									<ul>
 										<li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>
@@ -120,7 +122,9 @@
 							<div class="mb-3">
 								<label for="specialOfferInput"
 									th:text="${pizza.specialOffer != null} ? 'Sconto applicato: ' + ${pizza.specialOffer.title} : 'Sconto applicato: Nessuna offerta'">Applica
-									sconto</label> <!-- Modifica qui -->
+									sconto</label>
+									
+									<!-- Dropdown menù elenco offerte -->
 								<div class="input-group">
 									<div class="dropdown">
 										<button class="btn btn-warning dropdown-toggle" type="button"
@@ -143,6 +147,7 @@
 									<input type="text" class="form-control" id="specialOfferInput"
 										name="specialOfferTitle" readonly>
 									<input type="hidden" id="specialOfferId" name="offerId">
+									
 									<!-- Campo nascosto per memorizzare l'ID dell'offerta -->
 									<span class="input-group-text" id="specialOfferSconto">%</span>
 								</div>
@@ -158,20 +163,17 @@
 					</div>
 				</div>
 			</div>
+		</div>
 	</main>
 
 	<!-- FOOTER -->
 	<footer th:insert="~{fragments/footer :: footer}"></footer>
-	</div>
-	<!-- PERSONAL JS -->
-	<script th:src="@{/JS/myscript.js}"></script>
 
-	<!-- JS BOOTSTRAP -->
+	<!-- Java Script -->
+	<script th:src="@{/JS/myscript.js}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
-
-	</bodyonload="document.getElementById('pizza-form').reset();">
 
 </body>
 

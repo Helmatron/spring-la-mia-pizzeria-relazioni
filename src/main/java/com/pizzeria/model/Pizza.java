@@ -1,6 +1,7 @@
 package com.pizzeria.model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -126,6 +127,21 @@ public class Pizza {
 
 	public void setIngredienti(List<Ingredienti> ingredienti) {
 		this.ingredienti = ingredienti;
+	}
+
+	public String getIngredientiAsString() {
+		
+		// Verifica se la lista degli ingredienti è vuota o null
+		if (ingredienti == null || ingredienti.isEmpty()) {
+			return "";
+		}
+
+		// Crea una stringa con i nomi degli ingredienti separati da virgole
+		String ingredientiString = ingredienti.stream()
+				.map(Ingredienti::getName) // Estrai il nome di ogni ingrediente
+				.collect(Collectors.joining(", ")); // Unisci i nomi con una virgola e uno spazio
+
+		return ingredientiString;
 	}
 
 }
